@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannellum Tests</title>
+    <link rel="stylesheet" href="../src/css/pannellum.css" />
+    <script type="text/javascript" src="../src/js/libpannellum.js"></script>
+    <script type="text/javascript" src="../src/js/pannellum.js"></script>
+    <style>
+        #panorama {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="panorama"></div>
+    <script>
+        viewer = pannellum.viewer('panorama', {
+            /* 
+             * secara default saat kita membuka vr 360 maka kita akan di bawa ke halaman lapangan utama 
+             * hal itu disebabkan value dari firstScene adalah lapangan utama
+             * jika kita mengubah nya menjadi saung maka saat pertama kali membuka vr 360 maka kita dibawa ke halaman saung*/
+            "default": {
+                "author": "ICT 2 CIKBAR",
+                "firstScene": "lapangan-utama", // value dari firstScene adalah lapangan utama
+                "autoLoad": true
+            },
+
+            /* 
+                * sederhana nya scenes adalah tempat kita untuk membuat halaman halaman
+                * halaman halaman itu misalnya halaman lapangan utama, halaman saung, dan lain lain 
+            */
+            "scenes": {
+
+                "lapangan-utama": {
+                    "title": "Lapangan Utama", "hfov": 110,
+                    "pitch": -3,
+                    "yaw": 117,
+                    "type": "equirectangular",
+
+                    // value dari panorama adalah file gambar yang sudah kita download di aplikasi street view
+                    "panorama": "../examples/lapangan-utama.jpg",
+                    "hotSpots": [ // hotSpot yaitu yang gambar icon nya berupa tandah panah keatas
+                        {
+                            "pitch": 4, // pitch berguna untuk mengatur icon panah secara vertikal
+                            "yaw": -14, // yaw berguna untuk mengatur icon panah secara horizontal
+                            "type": "scene",
+                            "text": "Kelas X OTKP 1", // text berguna untuk memberikan nama lokasi yang akan kita tuju 
+                            "sceneId": "x-otkp-1" // value dari sceneId adalah lokasi yang akan kita tuju
+                        }
+                    ]
+                },
+
+                "x-otkp-1": {
+                    "title": "Kelas X OTKP 1", "hfov": 110,
+                    "pitch": -3,
+                    "yaw": 117,
+                    "type": "equirectangular",
+                    "panorama": "../examples/x-otkp-1.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": -2.1,
+                            "yaw": 132.9,
+                            "type": "scene",
+                            "text": "Lapangan Utama",
+                            "sceneId": "lapangan-utama"
+                        },
+                        {
+                            "pitch": -1.1,
+                            "yaw": 369,
+                            "type": "scene",
+                            "text": "Saung",
+                            "sceneId": "saung"
+                        }
+
+                    ]
+                },
+
+                "saung": {
+                    "title": "Saung", "hfov": 110,
+                    "pitch": -3,
+                    "yaw": 117,
+                    "type": "equirectangular",
+                    "panorama": "../examples/saung.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 4,
+                            "yaw": -14,
+                            "type": "scene",
+                            "text": "Kelas X OTKP 1",
+                            "sceneId": "x-otkp-1"
+                        }
+                    ]
+                },
+            }
+        });
+    </script>
+
+</body>
+
+</html>
